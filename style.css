@@ -1,0 +1,348 @@
+/* FONTS */
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins'), url(fonts/Poppins-Regular.ttf);
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins'), url(fonts/Poppins-Medium.ttf);
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins'), url(fonts/Poppins-SemiBold.ttf);
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: local('Poppins'), url(fonts/Poppins-Bold.ttf);
+    font-weight: bold;
+    font-display: swap;
+}
+
+/* CUSTOM PROPERTIES */
+:root {
+    --clr-primary-1: hsl(0, 50%, 54%);
+    --clr-primary-2: hsl(154, 59%, 33%);
+    --clr-primary-2-dk: hsl(154, 59%, 28%);
+    --clr-accent: hsl(248, 32%, 49%);
+    --clr-neutral-1: hsl(0, 0%, 100%);
+    --clr-neutral-2: hsl(246, 25%, 55%);
+    --clr-neutral-3: hsl(249, 10%, 26%);
+    --clr-neutral-3-tr: hsla(249, 10%, 26%, 0.2);
+
+    --ff: 'Poppins', sans-serif;
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    list-style: none;
+}
+
+picture,
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+.sr-only {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    color: #000;
+}
+
+body {
+    min-height: 100vh;
+    line-height: 1;
+    display: grid;
+    place-content: center;
+    background: url(images/bg-intro-mobile.png), var(--clr-primary-1);
+    padding: 3rem 0;
+    font-family: var(--ff);
+}
+
+/* MAIN */
+.intro {
+    display: grid;
+    gap: 4rem;
+    width: min(87%, 40rem);
+    margin: auto;
+    text-align: center;
+    color: var(--clr-neutral-1);
+}
+
+.intro__info {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.info__title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    line-height: 1.25;
+}
+
+.info__description {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    line-height: 1.625;
+}
+
+.intro__signup {
+    display: grid;
+    align-content: center;
+    gap: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.intro__signup>* {
+    border-radius: 0.5rem;
+}
+
+.signup__trial {
+    background-color: var(--clr-accent);
+    padding: 1.3rem 3rem 1rem;
+    font-size: 95%;
+}
+
+.signup__form {
+    display: grid;
+    gap: 0.9rem;
+    background-color: var(--clr-neutral-1);
+    padding: 1.5rem;
+}
+
+.signup__ty {
+    place-content: center;
+    gap: 0.5rem;
+    padding: 3rem 1rem;
+    background-color: var(--clr-neutral-1);
+    color: var(--clr-neutral-3);
+    display: none;
+}
+
+.signup__ty span {
+    color: var(--clr-primary-2);
+    font-weight: bold;
+}
+
+.form__box {
+    display: grid;
+    font-size: 88%;
+}
+
+.form__box>* {
+    border-radius: 0.3rem;
+}
+
+.form__box>*:not(.form__message) {
+    margin-top: 1rem;
+}
+
+.form__input {
+    border: 0.1rem solid var(--clr-neutral-3-tr);
+    padding: 1rem;
+    font-weight: 600;
+    min-width: 0;
+}
+
+.form__input:focus::placeholder {
+    opacity: 0.25;
+}
+
+::placeholder {
+    font-weight: 600;
+}
+
+.form__btn {
+    background-color: var(--clr-primary-2);
+    padding: 1.25rem 1rem 0.65rem;
+    color: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    border-bottom: 0.3rem solid var(--clr-primary-2-dk);
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.form__btn:hover,
+.form__btn:focus-visible {
+    filter: brightness(110%);
+}
+
+.form__tas {
+    color: var(--clr-neutral-2);
+    font-size: 69%;
+    padding: 0 1rem;
+}
+
+.form__tas a {
+    text-decoration: none;
+    color: var(--clr-primary-1);
+    font-weight: bold;
+}
+
+.signup__trial,
+.signup__form,
+.signup__ty {
+    box-shadow: 0 0.5rem 0 var(--clr-neutral-3-tr);
+}
+
+.form__message {
+    text-align: right;
+    font-size: 90%;
+    color: var(--clr-primary-1);
+    font-style: italic;
+    display: none;
+}
+
+.form__input.invalid {
+    background: url(images/icon-error.svg);
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    border: 0.15rem solid var(--clr-primary-1);
+}
+
+.form__message.show {
+    display: block;
+}
+
+.signup__form.hide {
+    display: none;
+}
+
+.signup__ty.show {
+    display: grid;
+}
+
+/* DESKTOP */
+@media screen and (min-width: 50rem) {
+    body {
+        background: url(images/bg-intro-desktop.png), var(--clr-primary-1);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+
+    .intro {
+        grid-template-columns: 1fr 1fr;
+        width: clamp(45rem, 77.1vw, 90rem);
+        gap: 1.85rem;
+    }
+
+    .intro__info {
+        align-content: center;
+        gap: 1.8rem;
+        text-align: left;
+        padding-top: 0.5rem;
+    }
+
+    .info__title {
+        font-size: clamp(3rem, 3.4vw, 4rem);
+        line-height: 1.125;
+    }
+
+    .info__description,
+    .intro__signup {
+        font-size: clamp(1rem, 1.1vw, 1.25rem);
+    }
+
+    .signup__form {
+        padding: 1.24rem 2.5rem 2.7rem;
+    }
+
+    .form__box>*:not(.form__message) {
+        margin-top: 1.26rem;
+    }
+
+    .form__input {
+        padding: 1.15rem 2rem 0.9rem;
+    }
+}
+
+/* FOOTER */
+.attribution {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    font-size: clamp(0.88rem, 1vw, 1rem);
+    color: var(--clr-neutral-3);
+    text-align: center;
+    line-height: 1.5;
+    position: fixed;
+    bottom: 0.5rem;
+    right: -15rem;
+    transition: 0.5s;
+}
+
+.attribution a {
+    color: var(--clr-accent);
+    font-weight: bold;
+}
+
+.attr__btn {
+    width: 2.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.attr__btn img {
+    width: 100%;
+    filter: drop-shadow(0 0.25rem 0 rgba(0, 0, 0, 0.25));
+}
+
+.attr__btn:hover,
+.attr__btn:focus-visible {
+    transform: scale(0.9);
+}
+
+.attr__info {
+    visibility: hidden;
+}
+
+.attribution.show {
+    bottom: 0.5rem;
+    right: 1rem;
+    background-color: rgba(250, 250, 250, 0.9);
+    border-radius: 0.3rem;
+}
+
+.attribution.show .attr__btn {
+    transform: rotate(180deg);
+    order: 1;
+}
+
+.attribution.show .attr__info {
+    visibility: visible;
+}
+
+@media screen and (min-width: 50rem) {
+    .attribution.show {
+        background-color: rgba(250, 250, 250, 0.6);
+    }
+}

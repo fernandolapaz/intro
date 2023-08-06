@@ -2,32 +2,58 @@
 const form = document.querySelector('.signup__form')
 const ty = document.querySelector('.signup__ty')
 const inputs = document.querySelectorAll('.form__input')
+const fname = document.getElementById('fname')
+const lname = document.getElementById('lname')
 const email = document.getElementById('email')
 const pass = document.getElementById('pass')
 
-// Email and Password checks
+function error(input) {
+    input.classList.add('invalid')
+    input.setAttribute('aria-invalid', 'true')
+    input.focus()
+}
+
+function reset(input) {
+    input.classList.remove('invalid')
+    input.removeAttribute('aria-invalid')
+    input.removeAttribute('aria-describedby')
+}
+
+// Checks
 email.addEventListener('focusout', function () {
     if (this.value !== '' && !(/.+@.+\..+/.test(this.value))) {
-        this.classList.add('invalid')
         this.nextElementSibling.innerText = 'Looks like this is not an email'
-        this.nextElementSibling.classList.add('show')
+        this.setAttribute('aria-describedby', 'message-email')
+        error(email)
+    } else {
+        reset(email)
     }
 })
 
 pass.addEventListener('focusout', function () {
     if (this.value.length !== 0 && !(/[A-Za-z\d]{8,}/.test(this.value))) {
-        this.classList.add('invalid')
         this.nextElementSibling.innerText = 'Password must be at least 8 characters'
-        this.nextElementSibling.classList.add('show')
+        this.setAttribute('aria-describedby', 'message-pass')
+        error(pass)
     } else if (this.value.length !== 0 && !(/(?=.*[A-Za-z])/.test(this.value))) {
-        this.classList.add('invalid')
         this.nextElementSibling.innerText = 'Password must have at least one letter'
-        this.nextElementSibling.classList.add('show')
+        this.setAttribute('aria-describedby', 'message-pass')
+        error(pass)
     } else if (this.value.length !== 0 && !(/(?=.*\d)/.test(this.value))) {
-        this.classList.add('invalid')
         this.nextElementSibling.innerText = 'Password must have at least one number'
-        this.nextElementSibling.classList.add('show')
+        this.setAttribute('aria-describedby', 'message-pass')
+        error(pass)
+    } else {
+        reset(pass)
     }
+})
+
+fname.addEventListener('focusout', function () {
+    reset(fname)
+})
+
+lname.addEventListener('focusout', function () {
+    reset(lname)
 })
 
 // Submit
@@ -38,31 +64,40 @@ form.addEventListener('submit', function (e) {
 
     for (let input of inputs) {
         if (input.value.trim() === '') {
-            input.classList.add('invalid')
             input.nextElementSibling.innerText = `${input.name} cannot be empty`
-            input.nextElementSibling.classList.add('show')
+            input.classList.add('invalid')
+            input.setAttribute('aria-invalid', 'true')
         }
 
-        if (input.classList.contains('invalid')) {
+        if (input.hasAttribute('aria-invalid')) {
             errors++
         }
     }
 
-    // setTimeout just to simulate a small delay
+    // Invalid
+    if (errors > 0) {
+        for (let input of inputs) {
+            if (input.classList.contains('invalid')) {
+                input.focus()
+                break
+            }
+        }
+    }
+
+    // Valid
     setTimeout(function () {
         if (errors === 0) {
             form.classList.add('hide')
             ty.classList.add('show')
+            ty.setAttribute('role', 'alert')
         }
-    }, 400)
+    }, 250)
 })
 
-// Clear
+//Clear
 for (let input of inputs) {
     input.addEventListener('focus', function () {
-        input.value = ''
         input.classList.remove('invalid')
-        input.nextElementSibling.classList.remove('show')
     })
 }
 

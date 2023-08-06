@@ -68,6 +68,12 @@ select {
     font: inherit;
 }
 
+/* Accessibility */
+*:focus-visible {
+    outline: 0.25rem dashed dodgerblue;
+    outline-offset: 0.15rem;
+}
+
 .sr-only {
     position: absolute;
     width: 0;
@@ -76,6 +82,7 @@ select {
     color: #000;
 }
 
+/* BODY */
 body {
     min-height: 100vh;
     line-height: 1;
@@ -131,9 +138,17 @@ body {
 
 .signup__form {
     display: grid;
-    gap: 0.9rem;
     background-color: var(--clr-neutral-1);
     padding: 1.5rem;
+    font-size: 88%;
+}
+
+.signup__form>* {
+    border-radius: 0.3rem;
+}
+
+.signup__form>*:not(.form__message) {
+    margin-top: 1rem;
 }
 
 .signup__ty {
@@ -148,19 +163,6 @@ body {
 .signup__ty span {
     color: var(--clr-primary-2);
     font-weight: bold;
-}
-
-.form__box {
-    display: grid;
-    font-size: 88%;
-}
-
-.form__box>* {
-    border-radius: 0.3rem;
-}
-
-.form__box>*:not(.form__message) {
-    margin-top: 1rem;
 }
 
 .form__input {
@@ -227,7 +229,11 @@ body {
     border: 0.15rem solid var(--clr-primary-1);
 }
 
-.form__message.show {
+/* .form__message.show {
+    display: block;
+} */
+
+[aria-invalid='true']~.form__message {
     display: block;
 }
 
@@ -272,10 +278,10 @@ body {
     }
 
     .signup__form {
-        padding: 1.24rem 2.5rem 2.7rem;
+        padding: 1.26rem 2.5rem 2.7rem;
     }
 
-    .form__box>*:not(.form__message) {
+    .signup__form>*:not(.form__message) {
         margin-top: 1.26rem;
     }
 

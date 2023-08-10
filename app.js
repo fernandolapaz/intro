@@ -96,8 +96,10 @@ form.addEventListener('submit', function (e) {
 
 //Clear
 for (let input of inputs) {
-    input.addEventListener('focus', function () {
+    input.addEventListener('keydown', function () {
         input.classList.remove('invalid')
+        input.removeAttribute('aria-invalid')
+        input.removeAttribute('aria-describedby')
     })
 }
 
